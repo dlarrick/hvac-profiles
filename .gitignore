@@ -10,6 +10,7 @@ venv/
 # Build / generated publish artifacts
 dist/
 _site/
+index.json
 
 # OS / Editor
 .DS_Store

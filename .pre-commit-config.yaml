@@ -1,0 +1,47 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: pretty-format-json
+        args: [--autofix, --indent, "2", --no-sort-keys]
+        files: ^(producers|schema)/.*\.json$
+      - id: check-added-large-files
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: validate-profiles
+        name: Validate producer profiles against schema
+        entry: python scripts/validate_profiles.py
+        language: python
+        additional_dependencies: ["jsonschema>=4.23.0"]
+        pass_filenames: false
+        files: ^(producers/.*\.json|schema/.*\.json|scripts/validate_profiles\.py)$
+
+      - id: test-scripts
+        name: Run script unit tests
+        entry: python -m unittest discover -s tests
+        language: python
+        additional_dependencies: ["jsonschema>=4.23.0"]
+        pass_filenames: false
+        files: ^(scripts/.*\.py|tests/.*\.py|schema/.*\.json)$
+
+      - id: test-build-site
+        name: Test static site and index.json generation
+        entry: python scripts/build_site.py --output /tmp/hvac-profiles-precommit-site
+        language: python
+        pass_filenames: false
+        files: ^(producers/.*\.json|scripts/build_site\.py)$

@@ -1,0 +1,28 @@
+name: Validate Profiles
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: pip install -r requirements-ci.txt
+
+      - name: Run script unit tests
+        run: python -m unittest discover -s tests
+
+      - name: Validate all producer profiles
+        run: python scripts/validate_profiles.py
+
+      - name: Test static site & index generation
+        run: python scripts/build_site.py --output /tmp/hvac-profiles-site
