@@ -28,7 +28,10 @@ hvac-profiles/
 
 ## Contributing
 
-Contributions of new manufacturer/model profiles and corrections to existing curves are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, data sources (NEEP ccASHP, AHRI, manufacturer engineering submittals), and schema requirements.
+Contributions of new manufacturer/model profiles and corrections to existing curves are welcome!
+
+> [!IMPORTANT]
+> **[CONTRIBUTING.md](CONTRIBUTING.md) is not just boilerplate** — it explains where to source data (NEEP ccASHP, AHRI, engineering submittals), how to avoid common pitfalls like mixing up **full-load vs. part-load COP**, and how to normalize `capacity_percentage`. Please read it before creating your first profile.
 
 ## License
 
