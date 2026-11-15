@@ -10,17 +10,27 @@ This repository decouples real-world HVAC equipment performance curves (heat pum
 * **Merges to `main`** publish a compact index (`index.json`) and validated profile files to GitHub Pages for runtime consumption.
 * **Generic fallback profiles** remain bundled inside `hvac-crossover` for offline resilience and unit testing.
 
+## Published Endpoints
+
+Validated profiles and the generated index are published via GitHub Pages on every merge to `main`:
+
+* **Base URL:** `https://dlarrick.github.io/hvac-profiles/v1/`
+* **Index (table JSON):** `https://dlarrick.github.io/hvac-profiles/v1/index.json`
+* **Profile JSON:** `https://dlarrick.github.io/hvac-profiles/v1/producers/<manufacturer>/<model>.json`
+
 ## Directory Layout
 
 ```text
 hvac-profiles/
 ├── .github/
 │   ├── PULL_REQUEST_TEMPLATE.md
-│   └── workflows/               # Schema validation & GitHub Pages publishing (upcoming)
+│   └── workflows/               # Schema validation & GitHub Pages publishing
 ├── producers/                   # Equipment profiles organized by manufacturer slug
 │   └── <manufacturer>/
 │       └── <model>.json
-├── schema/                      # JSON Schema definitions (upcoming)
+├── schema/                      # JSON Schema definitions (v1)
+├── scripts/                     # Profile validator and static site/index builder
+├── tests/                       # Unit tests for validator and site builder
 ├── CONTRIBUTING.md
 ├── LICENSE
 └── README.md

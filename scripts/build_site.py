@@ -60,6 +60,7 @@ def build_site(output_dir: Path) -> int:
     index_payload = {
         "version": 1,
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "url_template": "producers/{id}.json",
         "fields": INDEX_FIELDS,
         "rows": rows,
     }
