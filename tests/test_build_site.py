@@ -27,6 +27,7 @@ class BuildSiteTests(unittest.TestCase):
 
             index_data = json.loads(index_path.read_text(encoding="utf-8"))
             self.assertEqual(index_data["version"], 1)
+            self.assertEqual(index_data["url_template"], "producers/{id}.json")
             self.assertEqual(
                 index_data["fields"], ["id", "make", "series", "model", "type", "fuel"]
             )
